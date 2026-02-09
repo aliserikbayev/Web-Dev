@@ -14,11 +14,3 @@ meetup.self = meetup;
 alert( JSON.stringify(meetup, function replacer(key, value) {
   return (key != "" && value == meetup) ? undefined : value;
 }));
-
-/*
-{
-  "title":"Conference",
-  "occupiedBy":[{"name":"John"},{"name":"Alice"}],
-  "place":{"number":23}
-}
-*/

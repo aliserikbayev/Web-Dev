@@ -6,4 +6,4 @@ let keys = Array.from(map.keys());
 
 keys.push("more");
 
-alert(keys); // name, more
+alert(keys);

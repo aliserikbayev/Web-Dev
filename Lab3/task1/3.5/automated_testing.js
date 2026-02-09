@@ -3,7 +3,7 @@ describe("Raises x to power n", function() {
     assert.equal(pow(5, 1), 5);
   });
 
-  // Mocha will run only this block
+
   it.only("5 in the power of 2 equals 25", function() {
     assert.equal(pow(5, 2), 25);
   });

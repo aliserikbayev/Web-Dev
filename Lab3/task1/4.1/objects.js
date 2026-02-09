@@ -17,11 +17,10 @@ for (let key in salaries) {
   sum += salaries[key];
 }
 
-alert(sum); // 390
+alert(sum); 
 
 function isEmpty(obj) {
   for (let key in obj) {
-    // if the loop has started, there is a property
     return false;
   }
   return true;
