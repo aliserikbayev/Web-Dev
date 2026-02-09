@@ -1,0 +1,68 @@
+body{
+    font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif;
+}
+h1{
+    color: green;
+    text-align: center;
+}
+h2{
+    text-align: center;
+}
+.textunder{
+    text-align: center;
+}
+
+.bold-txt{
+    font-weight: bold;
+}
+
+main{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    margin: 200px;
+
+}
+.forms{
+    margin-bottom: 20px;
+}
+.signup{
+    width: 100%;
+    max-width: 450px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    padding-bottom: 30px;
+
+}
+a{
+    color: green;
+    text-decoration: none;
+}
+.btn{
+    margin: auto;
+    border-radius: 15px;
+    font-size: 1.2rem;
+    padding: 10px 100px;
+    box-sizing: border-box;
+    background-color: green;
+    border-width: 1px;
+}
+.generic-btn{
+    border-radius: 15px;
+    font-size: 1.2rem;
+    padding: 10px 100px;
+    box-sizing: border-box;
+    border-width: 1px;
+}
+
+.submit{
+    display: flex;
+  justify-content: center; 
+  align-items: center;
+  margin: 10px; 
+}
+
+.underwear{
+    text-align: center;
+}
