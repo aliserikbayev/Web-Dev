@@ -1,0 +1,47 @@
+<h1>Online Store</h1>
+
+<div class="categories">
+  <button (click)="selectedCategory='All'">All</button>
+  <button (click)="selectedCategory='Smartphones'">Smartphones</button>
+  <button (click)="selectedCategory='Laptops'">Laptops</button>
+  <button (click)="selectedCategory='Gaming'">Gaming</button>
+  <button (click)="selectedCategory='Appliances'">Appliances</button>
+</div>
+
+<div class="products">
+  <div class="card" *ngFor="let product of filteredProducts">
+
+    <img [src]="product.image" [alt]="product.name">
+
+    <h2>{{ product.name }}</h2>
+
+    <p>{{ product.description }}</p>
+
+    <p class="price">{{ product.price }} ₸</p>
+
+    <p>Rating: ⭐ {{ product.rating }}</p>
+
+    <p>Category: {{ product.category }}</p>
+
+    <p>❤️ Likes: {{ product.likes }}</p>
+    
+
+    <button (click)="likeProduct(product)">Like</button>
+    
+    <div class="share-buttons">
+  <button (click)="shareOnWhatsApp(product)">
+    Share on WhatsApp
+  </button>
+
+  <button (click)="shareOnTelegram(product)">
+    Share on Telegram
+  </button>
+</div>
+
+
+    <a [href]="product.link" target="_blank">
+      <button>View on Kaspi</button>
+    </a>
+
+  </div>
+</div>
