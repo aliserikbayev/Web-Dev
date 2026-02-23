@@ -1,0 +1,24 @@
+<header class="navbar">
+  <div class="logo">🛒 My Online Store</div>
+
+	<nav class="categories">
+  	@for (category of categories; track category.id) {
+    <a
+      [routerLink]="'/category/' + category.id"
+      routerLinkActive="active">
+      {{ category.name }}
+    </a>
+  }
+</nav>
+
+  <div class="search">
+    <input
+      type="text"
+      placeholder="Search products..."
+      [(ngModel)]="searchText">
+  </div>
+</header>
+
+<main class="container">
+  <router-outlet></router-outlet>
+</main>
