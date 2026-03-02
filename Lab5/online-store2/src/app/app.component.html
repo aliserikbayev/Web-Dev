@@ -1,0 +1,50 @@
+<div class="app-container">
+
+  <!-- 1. CATEGORIES -->
+  <div class="categories-bar">
+    <button
+      *ngFor="let category of categories"
+      class="category-btn"
+      [class.active]="selectedCategoryId === category.id"
+      (click)="selectCategory(category.id)"
+    >
+      {{ category.name }}
+    </button>
+  </div>
+
+  <!-- 2. FAVORITES SECTION -->
+  <div class="favorites-section">
+    <h2 class="favorites-title">⭐ Favorites ({{ favorites.length }})</h2>
+    <hr />
+
+    <div *ngIf="favorites.length === 0" class="empty-favorites">
+      No favorite products yet
+    </div>
+
+    <div *ngIf="favorites.length > 0" class="product-grid">
+      <app-product-list
+        [products]="favorites"
+        [title]="''"
+        (toggleFavorite)="toggleFavorite($event)"
+        (likeProduct)="likeProduct($event)"
+        (deleteProduct)="deleteProduct($event)"
+      ></app-product-list>
+    </div>
+  </div>
+
+  <!-- 3. PRODUCT LIST -->
+  <div *ngIf="selectedCategoryId !== null">
+    <app-product-list
+      [products]="filteredProducts"
+      [title]="'Products'"
+      (toggleFavorite)="toggleFavorite($event)"
+      (likeProduct)="likeProduct($event)"
+      (deleteProduct)="deleteProduct($event)"
+    ></app-product-list>
+  </div>
+
+  <div *ngIf="selectedCategoryId === null" class="welcome">
+    👆 Select a category to see products
+  </div>
+
+</div>

@@ -1,0 +1,155 @@
+.product-card {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+  width: 200px;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.13);
+}
+
+.product-image {
+  width: 100%;
+  height: 160px;
+  object-fit: contain;
+  padding: 12px;
+  background: #f9f9f9;
+}
+
+.product-info {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.product-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+.product-price {
+  font-size: 15px;
+  font-weight: 700;
+  color: #222;
+  margin: 0;
+}
+
+.product-rating {
+  font-size: 12px;
+  color: #555;
+  margin: 0;
+}
+
+.star {
+  color: #ccc;
+  font-size: 14px;
+}
+
+.star.filled {
+  color: #f5a623;
+}
+
+.product-likes {
+  font-size: 12px;
+  color: #e55;
+  margin: 0;
+}
+
+.card-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.btn-favorite {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  background: #f5a623;
+  color: #fff;
+  transition: background 0.2s;
+}
+
+.btn-favorite.in-favorites {
+  background: #e53935;
+}
+
+.btn-favorite:hover {
+  opacity: 0.88;
+}
+
+.btn-like {
+  padding: 6px 10px;
+  border: 1px solid #e55;
+  border-radius: 8px;
+  background: #fff;
+  color: #e55;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  transition: background 0.2s, color 0.2s;
+}
+
+.btn-like:hover {
+  background: #e55;
+  color: #fff;
+}
+
+.btn-delete {
+  padding: 6px 10px;
+  border: 1px solid #aaa;
+  border-radius: 8px;
+  background: #fff;
+  color: #888;
+  cursor: pointer;
+  font-size: 12px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.btn-delete:hover {
+  background: #888;
+  color: #fff;
+}
+
+.share-actions {
+  display: flex;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.btn-whatsapp {
+  flex: 1;
+  padding: 6px;
+  border: none;
+  border-radius: 8px;
+  background: #25d366;
+  color: #fff;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.btn-telegram {
+  flex: 1;
+  padding: 6px;
+  border: none;
+  border-radius: 8px;
+  background: #229ed9;
+  color: #fff;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 600;
+}

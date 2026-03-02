@@ -1,0 +1,31 @@
+.product-list-section {
+  background: #fff;
+  border-radius: 16px;
+  padding: 20px 24px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+}
+
+.section-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 8px 0;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #eee;
+  margin-bottom: 16px;
+}
+
+.product-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.empty-message {
+  color: #aaa;
+  font-size: 14px;
+  padding: 20px 0;
+}

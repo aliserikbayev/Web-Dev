@@ -1,0 +1,18 @@
+<div class="product-list-section">
+  <h2 class="section-title">{{ title }}</h2>
+  <hr />
+
+  <div *ngIf="products.length === 0" class="empty-message">
+    No products in this category.
+  </div>
+
+  <div class="product-grid">
+    <app-product-item
+      *ngFor="let product of products"
+      [product]="product"
+      (toggleFavorite)="onToggleFavorite($event)"
+      (likeProduct)="onLike($event)"
+      (deleteProduct)="onDelete($event)"
+    ></app-product-item>
+  </div>
+</div>
