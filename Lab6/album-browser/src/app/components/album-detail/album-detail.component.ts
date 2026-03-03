@@ -10,258 +10,57 @@ import { Album } from '../../models/album.model';
   standalone: true,
   imports: [NgIf, FormsModule, RouterLink],
   template: `
-    <div class="detail-page">
-      <div class="detail-inner">
-        <div class="breadcrumb">
-          <button class="btn-back" (click)="goBack()">← Back to Albums</button>
+    <div class="page">
+      <button class="btn-back" (click)="goBack()">← Back to Albums</button>
+
+      <div *ngIf="loading">Loading album...</div>
+
+      <div *ngIf="!loading && album">
+        <h1>Album #{{ album.id }}</h1>
+        <p><strong>Title:</strong> {{ album.title }}</p>
+        <p><strong>User ID:</strong> {{ album.userId }}</p>
+
+        <div class="edit-section">
+          <h2>Edit Title</h2>
+          <input type="text" [(ngModel)]="editTitle" class="input" />
+          <button class="btn" (click)="saveAlbum()" [disabled]="saving">
+            {{ saving ? 'Saving...' : 'Save' }}
+          </button>
+          <span *ngIf="saveSuccess" class="success-msg">Saved!</span>
         </div>
 
-        <div *ngIf="loading" class="loading">
-          <div class="spinner"></div>
-          <span>Loading album…</span>
-        </div>
-
-        <div *ngIf="!loading && album" class="detail-content">
-          <div class="album-badge">#{{ album.id.toString().padStart(3, '0') }}</div>
-          <h1>{{ album.title }}</h1>
-
-          <div class="meta-row">
-            <span class="meta-label">User ID</span>
-            <span class="meta-value">{{ album.userId }}</span>
-          </div>
-
-          <div class="edit-section">
-            <div class="edit-label">[ EDIT TITLE ]</div>
-            <div class="edit-row">
-              <input
-                type="text"
-                [(ngModel)]="editTitle"
-                class="edit-input"
-                placeholder="Album title"
-              />
-              <button class="btn-save" (click)="saveAlbum()" [disabled]="saving">
-                {{ saving ? 'Saving…' : 'Save' }}
-              </button>
-            </div>
-            <div *ngIf="saveSuccess" class="save-success">✓ Saved successfully</div>
-          </div>
-
-          <div class="action-row">
-            <a [routerLink]="['/albums', album.id, 'photos']" class="btn-photos">
-              View Photos →
-            </a>
-          </div>
-        </div>
-
-        <div *ngIf="!loading && !album" class="not-found">
-          Album not found.
+        <div class="actions">
+          <a [routerLink]="['/albums', album.id, 'photos']" class="btn">View Photos</a>
         </div>
       </div>
+
+      <div *ngIf="!loading && !album">Album not found.</div>
     </div>
   `,
   styles: [`
-    .detail-page {
-      min-height: calc(100vh - 72px);
-      padding: 3rem 2rem 4rem;
-      display: flex;
-      justify-content: center;
-    }
-
-    .detail-inner {
-      max-width: 600px;
-      width: 100%;
-      animation: fadeUp 0.5s ease both;
-    }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
+    .page { max-width: 600px; margin: 40px auto; padding: 0 16px; }
     .btn-back {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.75rem;
-      letter-spacing: 0.08em;
-      color: var(--text-muted);
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 0;
-      margin-bottom: 2.5rem;
-      display: block;
-      transition: color 0.2s ease;
+      background: none; border: none; color: #3f51b5;
+      cursor: pointer; font-size: 0.95rem; margin-bottom: 20px; padding: 0;
     }
-
-    .btn-back:hover {
-      color: var(--accent);
+    .btn-back:hover { text-decoration: underline; }
+    h1 { margin-bottom: 12px; }
+    p { margin-bottom: 8px; color: #444; }
+    .edit-section { margin: 24px 0; }
+    h2 { font-size: 1rem; margin-bottom: 10px; }
+    .input {
+      width: 100%; padding: 8px; border: 1px solid #ccc;
+      border-radius: 4px; font-size: 1rem; margin-bottom: 10px;
     }
-
-    .loading {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 5rem;
-      gap: 1.5rem;
-      color: var(--text-muted);
-      font-family: 'Space Mono', monospace;
-      font-size: 0.8rem;
-      letter-spacing: 0.1em;
+    .btn {
+      display: inline-block; padding: 8px 18px; background: #3f51b5;
+      color: white; border: none; border-radius: 4px; cursor: pointer;
+      font-size: 0.95rem; text-decoration: none;
     }
-
-    .spinner {
-      width: 36px;
-      height: 36px;
-      border: 2px solid var(--border);
-      border-top-color: var(--accent);
-      border-radius: 50%;
-      animation: spin 0.8s linear infinite;
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
-    .album-badge {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.72rem;
-      letter-spacing: 0.2em;
-      color: var(--accent);
-      margin-bottom: 0.75rem;
-    }
-
-    h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.2rem;
-      font-weight: 700;
-      color: var(--text);
-      margin: 0 0 2rem;
-      line-height: 1.3;
-      text-transform: capitalize;
-    }
-
-    .meta-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 0;
-      border-bottom: 1px solid var(--border);
-      margin-bottom: 2.5rem;
-    }
-
-    .meta-label {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.72rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-    }
-
-    .meta-value {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.85rem;
-      color: var(--text);
-    }
-
-    .edit-section {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      padding: 1.75rem;
-      margin-bottom: 2rem;
-    }
-
-    .edit-label {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.2em;
-      color: var(--accent);
-      margin-bottom: 1rem;
-    }
-
-    .edit-row {
-      display: flex;
-      gap: 0.75rem;
-    }
-
-    .edit-input {
-      flex: 1;
-      padding: 0.7rem 1rem;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      color: var(--text);
-      font-size: 0.9rem;
-      font-family: inherit;
-      outline: none;
-      transition: border-color 0.2s ease;
-    }
-
-    .edit-input:focus {
-      border-color: var(--accent);
-    }
-
-    .btn-save {
-      padding: 0.7rem 1.5rem;
-      background: var(--accent);
-      color: #000;
-      border: none;
-      font-family: 'Space Mono', monospace;
-      font-size: 0.78rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      white-space: nowrap;
-    }
-
-    .btn-save:hover:not(:disabled) {
-      background: #fff;
-    }
-
-    .btn-save:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-
-    .save-success {
-      margin-top: 0.75rem;
-      font-family: 'Space Mono', monospace;
-      font-size: 0.75rem;
-      color: #7ee787;
-      letter-spacing: 0.05em;
-    }
-
-    .action-row {
-      display: flex;
-      gap: 1rem;
-    }
-
-    .btn-photos {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.75rem 1.75rem;
-      background: none;
-      border: 1px solid var(--accent);
-      color: var(--accent);
-      font-family: 'Space Mono', monospace;
-      font-size: 0.78rem;
-      letter-spacing: 0.08em;
-      text-decoration: none;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-
-    .btn-photos:hover {
-      background: var(--accent);
-      color: #000;
-    }
-
-    .not-found {
-      text-align: center;
-      padding: 5rem;
-      color: var(--text-muted);
-      font-family: 'Space Mono', monospace;
-    }
+    .btn:hover:not(:disabled) { background: #303f9f; }
+    .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    .success-msg { margin-left: 12px; color: green; font-size: 0.9rem; }
+    .actions { margin-top: 20px; }
   `]
 })
 export class AlbumDetailComponent implements OnInit {
