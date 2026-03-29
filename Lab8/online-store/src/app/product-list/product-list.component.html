@@ -1,0 +1,9 @@
+<div class="grid">
+  @for (product of products; track product.id) {
+    <app-product-item
+      [product]="product"
+      (delete)="onDelete($event)"
+      (favoriteToggled)="onFavoriteToggled($event)">
+    </app-product-item>
+  }
+</div>

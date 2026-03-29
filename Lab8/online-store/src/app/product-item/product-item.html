@@ -1,0 +1,22 @@
+<div class="card">
+  <img class="product-img" [src]="product().image" alt="{{ product().name }}">
+  <div class="card-body">
+    <h3>{{ product().name }}</h3>
+    <div class="rating">
+      <span *ngFor="let star of stars">⭐</span>
+    </div>
+    <p class="product-description">{{ product().description }}</p>
+    <p class="price">{{ product().price }} ₸</p>
+    <div class="actions">
+      <button class="like-btn" (click)="onLike()">❤️ {{ likes() }}</button>
+      <button class="delete-btn" (click)="onDelete()">Delete</button>
+      <button (click)="onToggleFavorite()">
+        {{ product().isFavorite ? '⭐ In Favorites' : '⭐ Add to Favorites' }}
+      </button>
+    </div>
+    <div class="share">
+      <button (click)="shareWhatsApp()">WhatsApp</button>
+      <button (click)="shareTelegram()">Telegram</button>
+    </div>
+  </div>
+</div>

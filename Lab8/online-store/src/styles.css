@@ -1,0 +1,57 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: #f4f6f9;
+}
+
+/* NAVBAR */
+.navbar {
+  background: #1e1e2f;
+  color: white;
+  padding: 15px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.categories {
+  display: flex;
+  gap: 20px;
+}
+
+.categories a {
+  text-decoration: none;
+  color: #ccc;
+  padding: 6px 12px;
+  border-radius: 6px;
+  transition: 0.3s;
+}
+
+.categories a:hover {
+  background: #3a3a5c;
+  color: white;
+}
+
+.categories a.active {
+  background: #4caf50;
+  color: white;
+}
+
+/* SEARCH */
+.search input {
+  padding: 6px 12px;
+  border-radius: 20px;
+  border: none;
+  outline: none;
+}
+
+/* MAIN CONTAINER */
+.container {
+  max-width: 1200px;
+  margin: 20px auto;
+}
