@@ -34,6 +34,23 @@ def category_to_dict(category):
 @require_http_methods(['GET'])
 def product_list(request):
     products = Product.objects.select_related('category').all()
+
+    category_id = request.GET.get('category')   
+    active = request.GET.get('active')
+    search = request.GET.get('search')
+
+    if category_id:
+        products = products.filter(category_id=category_id)
+
+    if active is not None:
+        if active == 'true':
+            products = products.filter(is_active=True)
+        elif active == 'false':
+            products = products.filter(is_active=False)
+
+    if search:
+        products = products.filter(name__icontains=search)
+
     data = [product_to_dict(p) for p in products]
     return JsonResponse(data, safe=False)
 
