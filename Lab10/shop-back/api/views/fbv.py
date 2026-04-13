@@ -41,3 +41,16 @@ def product_detail(request, product_id):
     elif request.method == 'DELETE':
         product.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+        
+@api_view(['GET'])
+def active_products(request):
+    products = Product.objects.filter(is_active=True)
+    serializer = ProductSerializer(products, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+def expensive_products(request):
+    products = Product.objects.filter(price__gt=100000)
+    serializer = ProductSerializer(products, many=True)
+    return Response(serializer.data)

@@ -49,3 +49,16 @@ class ProductDetailAPIView(APIView):
             return Response({'error': 'Not found'}, status=status.HTTP_404_NOT_FOUND)
         product.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+        
+class ActiveProductListAPIView(APIView):
+    def get(self, request):
+        products = Product.objects.filter(is_active=True)
+        serializer = ProductSerializer(products, many=True)
+        return Response(serializer.data)
+
+
+class ExpensiveProductListAPIView(APIView):
+    def get(self, request):
+        products = Product.objects.filter(price__gt=100000)
+        serializer = ProductSerializer(products, many=True)
+        return Response(serializer.data)

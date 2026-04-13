@@ -4,4 +4,6 @@ from api.views.generics import (
     CategoryListAPIView,
     CategoryDetailAPIView,
     CategoryProductsAPIView,
+    ActiveProductListAPIView,
+    ExpensiveProductListAPIView,
 )
